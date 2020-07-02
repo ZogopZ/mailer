@@ -13,7 +13,9 @@
 from datetime import timedelta
 from render_tools import *
 from tools import *
+import timeit
 
+start_time = timeit.default_timer()
 now = datetime.datetime.today()
 # Stopped working due to Corona-Virus.
 corona_start = datetime.datetime(2020, 3, 14, 9)
@@ -120,5 +122,8 @@ zois_email = dateString + \
              signature + pySignature
 
 print(zois_email)
-send_email(zois_email)
-
+# send_email(zois_email)
+stop_time = timeit.default_timer()
+execution_time = stop_time - start_time
+# It returns time in seconds.
+print('-- mailer was Executed in ' + str('{:.4f}'.format(execution_time)) + ' --')
