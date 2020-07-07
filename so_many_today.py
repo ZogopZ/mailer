@@ -122,8 +122,9 @@ zois_email = dateString + \
              signature + pySignature
 
 print(zois_email)
-# send_email(zois_email)
+send_email(zois_email)
 stop_time = timeit.default_timer()
 execution_time = stop_time - start_time
 # It returns time in seconds.
-print('-- mailer was Executed in ' + str('{:.4f}'.format(execution_time)) + ' --')
+print('-- mailer was Executed in ' + str('{:.4f}'.format(execution_time)) +
+      ' seconds --')
