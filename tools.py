@@ -155,7 +155,7 @@ def send_email(zois_email):
     print("Mail to Porportheon was successfully sent.")
     # Set subject and send the message via the server to pitsimpriko.
     msg['Subject'] = '[Zizizi] Regarding monthly salary.'
-    server.sendmail(msg['From'], "marianna.leventi@fil.lu.se",
+    server.sendmail(msg['From'], "mariannaleventi@mgmail.com",
                     msg.as_string())
     print("Mail to PhD student Marianna, was successfully sent.")
     # Set subject and send the message via the server to Hlia.
