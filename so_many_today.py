@@ -11,7 +11,8 @@
 
 
 from datetime import timedelta
-from render_tools import *
+from render_tools import render_output_0, render_output_2
+import title_tools
 from tools import *
 import timeit
 
@@ -29,12 +30,19 @@ work_end = datetime.datetime(now.year, now.month, now.day, 17, 0, 0, 0)
 first_day_date = datetime.datetime(2019, 11, 13, 9)
 # Deprecated: Specify ending date of internship.
 last_day_date = datetime.datetime(2020, 7, 31, 9)
+# Specify a random date-time to use as start_time in military titles.
+# Remove this and use 'first_day_date' variable to see the correct
+# title.
+random_start_time = datetime.datetime(2020, 7, 15, 9, 0, 0, 0)
 # Sets working dates, weekends
 set_dates(first_day_date, last_day_date, corona_start, corona_end)
 # Sets holidays.
 set_holidays()
 # Sets working_status True if working, false if not.
 set_working_status(now)
+# Creates an instance of Title class.
+user_titles = title_tools.Title(random_start_time, last_day_date, now)
+output_0 = render_output_0(user_titles.military_title())
 
 # Total pay for 6 month internship.
 total_to_be_paid = 580.8 * 6
@@ -90,7 +98,7 @@ time_worked += time_worked_today.total_seconds()
 # Convert to microseconds.
 microseconds_passed = time_worked * (10**6)
 microseconds_passed_off_days = paid_days_off(now) * 8 * 60 * 60 * (10**6)
-euro_made = (microseconds_passed+microseconds_passed_off_days) *\
+euro_made = (microseconds_passed+microseconds_passed_off_days) * \
             pay_per_microsecond_8
 monthly_wage_earned = 0
 # First month work was less than a full months work.
@@ -118,7 +126,7 @@ pySignature = 113 * " " + "This is an automated email from Python.\r\n"
 dateString = "Ημερομηνία: " + str(now.date()) + \
              "\r\nΏρα: " + str(now.time()) + "\r\n\r\n"
 zois_email = dateString + \
-             output_1 + output_2 + output_3 + output_4 + \
+             output_0 + output_1 + output_2 + output_3 + output_4 + \
              signature + pySignature
 
 print(zois_email)

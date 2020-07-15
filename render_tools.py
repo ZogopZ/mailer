@@ -1,3 +1,7 @@
+def render_output_0(title):
+    output_0 = 'Τίτλος:' + ' ' + title + ' Ζώης Ζωγόπουλος\r\n\r\n'
+    return output_0
+
 def render_output_2(time_worked_today, pay_per_microsecond_8):
     # Convert time worked to microseconds.
     microseconds_passed_today = time_worked_today.total_seconds() * (10**6)
