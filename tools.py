@@ -146,7 +146,7 @@ def send_solo_email(zois_email):
     # Hide password typing from screen.
     server.login('zwisss@hotmail.com', getpass.getpass("Password: "))
     # Set subject and send the message via the server to maself.
-    msg['Subject'] = "Very important stuff"
+    msg['Subject'] = 'Very important stuff solarized + ' + solo_email
     server.sendmail(msg['From'], "zwisss@hotmail.com",
                     msg.as_string())
     print("\nMail to maself was successfully sent.")
