@@ -128,7 +128,36 @@ def paid_days_off(now):
         off_days_paid = 2.48 + 5 + 4 + 5 + 5 + 5 + 4 + 4
     return off_days_paid
 
-def send_email(zois_email):
+def send_solo_email(zois_email):
+    solo_email = input('Please gib e-mail: ')
+    # Create message object instance.
+    msg = MIMEMultipart()
+    # Setup the parameters of the message.
+    msg['From'] = "zwisss@hotmail.com"
+    # Add in the message body.
+    msg.attach(MIMEText(zois_email, 'plain'))
+    server = smtplib.SMTP("smtp.live.com", 587)
+    # Hostname to send for this command defaults to the fully qualified
+    # domain name of the local host.
+    server.ehlo()
+    # Puts connection to SMTP server in TLS mode
+    server.starttls()
+    server.ehlo()
+    # Hide password typing from screen.
+    server.login('zwisss@hotmail.com', getpass.getpass("Password: "))
+    # Set subject and send the message via the server to maself.
+    msg['Subject'] = "Very important stuff"
+    server.sendmail(msg['From'], "zwisss@hotmail.com",
+                    msg.as_string())
+    print("\nMail to maself was successfully sent.")
+    # Set subject and send the message via the server to one e-mail.
+    msg['Subject'] = 'An e-mail from your φρέντ'
+    server.sendmail(msg['From'], solo_email,
+                    msg.as_string())
+    print('Solarized email was successfully sent.')
+    server.quit()
+
+def send_multi_email(zois_email):
     # Create message object instance.
     msg = MIMEMultipart()
     # Setup the parameters of the message.

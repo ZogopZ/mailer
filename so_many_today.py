@@ -15,6 +15,7 @@ from render_tools import render_output_0, render_output_2
 import title_tools
 from tools import *
 import timeit
+import sys
 
 start_time = timeit.default_timer()
 now = datetime.datetime.today()
@@ -130,7 +131,10 @@ zois_email = dateString + \
              signature + pySignature
 
 print(zois_email)
-send_email(zois_email)
+if len(sys.argv) > 1 and sys.argv[1] == '-s':
+    send_solo_email(zois_email)
+else:
+    send_multi_email(zois_email)
 stop_time = timeit.default_timer()
 execution_time = stop_time - start_time
 # It returns time in seconds.
