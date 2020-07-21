@@ -55,16 +55,16 @@ pay_per_microsecond_8 = 23.232 / (8 * 60 * 60 * 1000 * 1000)
 so_many_today = last_day_date + timedelta(hours=8) - now
 # This function returns time left in multiple time types.
 tfl = time_left(so_many_today)
-output_1 = "Η πρακτική μου τελειώνει σε " + str(tfl[0]) + " χρόνια " \
-           + str(tfl[1]) + " μήνες " + str(tfl[2]) + " εβδομάδες " \
-           + str(tfl[3]) + " ημέρες " + "\r\n" + 49 * " " \
-           + str(tfl[3]) + " ώρες " + str(tfl[4]) + " λεπτά " \
-           + str(tfl[5]) + " δευτερόλεπτα " + "\r\n" + 49 * " " \
-           + str(tfl[6]) + " χιλιοστά του δευτερολέπτου και " \
-           + str(tfl[7]) + " μικροδευτερόλεπτα.\r\n"
+output_1 = 'Η πρακτική μου τελειώνει σε ' + str(tfl[0]) + ' χρόνια ' \
+           + str(tfl[1]) + ' μήνες ' + str(tfl[2]) + ' εβδομάδες ' \
+           + str(tfl[3]) + ' ημέρες ' + '\r\n' + 49 * ' ' \
+           + str(tfl[3]) + ' ώρες ' + str(tfl[4]) + ' λεπτά ' \
+           + str(tfl[5]) + ' δευτερόλεπτα ' + '\r\n' + 49 * ' ' \
+           + str(tfl[6]) + ' χιλιοστά του δευτερολέπτου και ' \
+           + str(tfl[7]) + ' μικροδευτερόλεπτα.\r\n'
 
 
-output_2 = ""
+output_2 = ''
 time_worked_today = 0
 # If I am working right now, calculate pay earned today.
 if get_working_status():
@@ -78,12 +78,12 @@ if get_working_status():
 elif not get_working_status():
     if now < work_start:
         time_worked_today = now - now
-        output_2 = "\nΑυτήν την στιγμή δεν δουλεύω και αράζω πέτσα. " \
-                   "Σε λιγάκι πιάνουμε δουλειά...\r\n"
+        output_2 = '\nΑυτήν την στιγμή δεν δουλεύω και αράζω πέτσα. ' \
+                   'Σε λιγάκι πιάνουμε δουλειά...\r\n'
     elif now > work_end:
         time_worked_today = work_end - work_start
-        output_2 = "\nΑυτήν την στιγμή δεν δουλεύω και αράζω πέτσα." \
-                   "Σήμερα βγήκε το μεροκάματο των 23,232 ευρώ. \r\n"
+        output_2 = '\nΑυτήν την στιγμή δεν δουλεύω και αράζω πέτσα.' \
+                   'Σήμερα βγήκε το μεροκάματο των 23,232 ευρώ. \r\n'
 
 time_worked = 0
 days_worked = 0
@@ -113,19 +113,19 @@ elif (euro_made / 580.8) > 1:
 # Exactly one month's work.
 elif (euro_made / 580.8) == 1:
     monthly_wage_earned = 580.8
-output_3 = "Μηνιαία έχω βγάλει " + str(monthly_wage_earned) + \
-           " ευρώ. (Προσοχή! Στο ποσό αυτό συνυπολογίζονται οι 2-5" \
-           " μέρες που πληρώνομαι" \
-           " κάθε μήνα χωρίς να δουλεύω...)\r\n"
-output_4 = "Συνολικά έχω βγάλει " + str(euro_made) + \
-           " ευρώ και έχω δουλέψει " + \
+output_3 = 'Μηνιαία έχω βγάλει ' + str(monthly_wage_earned) + \
+           ' ευρώ. (Προσοχή! Στο ποσό αυτό συνυπολογίζονται οι 2-5' \
+           ' μέρες που πληρώνομαι' \
+           ' κάθε μήνα χωρίς να δουλεύω...)\r\n'
+output_4 = 'Συνολικά έχω βγάλει ' + str(euro_made) + \
+           ' ευρώ και έχω δουλέψει ' + \
            str(days_worked) + \
-           " ημέρες, συνυπολογίζοντας την σημερινή.\r\n\r\n"
-signature = "Regards,\r\nZois Zogopoulos\r\n"
-pySignature = 113 * " " + "This is an automated email from Python.\r\n"
+           ' ημέρες, συνυπολογίζοντας την σημερινή.\r\n\r\n'
+signature = 'Regards,\r\nZois Zogopoulos\r\n'
+pySignature = 113 * ' ' + 'This is an automated email from Python.\r\n'
 
-dateString = "Ημερομηνία: " + str(now.date()) + \
-             "\r\nΏρα: " + str(now.time()) + "\r\n\r\n"
+dateString = 'Ημερομηνία: ' + str(now.date()) + \
+             '\r\nΏρα: ' + str(now.time()) + '\r\n\r\n'
 zois_email = dateString + \
              output_0 + output_1 + output_2 + output_3 + output_4 + \
              signature + pySignature

@@ -133,10 +133,10 @@ def send_solo_email(zois_email):
     # Create message object instance.
     msg = MIMEMultipart()
     # Setup the parameters of the message.
-    msg['From'] = "zwisss@hotmail.com"
+    msg['From'] = 'zwisss@hotmail.com'
     # Add in the message body.
     msg.attach(MIMEText(zois_email, 'plain'))
-    server = smtplib.SMTP("smtp.live.com", 587)
+    server = smtplib.SMTP('smtp.live.com', 587)
     # Hostname to send for this command defaults to the fully qualified
     # domain name of the local host.
     server.ehlo()
@@ -144,12 +144,12 @@ def send_solo_email(zois_email):
     server.starttls()
     server.ehlo()
     # Hide password typing from screen.
-    server.login('zwisss@hotmail.com', getpass.getpass("Password: "))
+    server.login('zwisss@hotmail.com', getpass.getpass('Password: '))
     # Set subject and send the message via the server to maself.
     msg['Subject'] = 'Very important stuff solarized + ' + solo_email
-    server.sendmail(msg['From'], "zwisss@hotmail.com",
+    server.sendmail(msg['From'], 'zwisss@hotmail.com',
                     msg.as_string())
-    print("\nMail to maself was successfully sent.")
+    print('\nMail to maself was successfully sent.')
     # Set subject and send the message via the server to one e-mail.
     msg['Subject'] = 'An e-mail from your φρέντ'
     server.sendmail(msg['From'], solo_email,
@@ -161,10 +161,10 @@ def send_multi_email(zois_email):
     # Create message object instance.
     msg = MIMEMultipart()
     # Setup the parameters of the message.
-    msg['From'] = "zwisss@hotmail.com"
+    msg['From'] = 'zwisss@hotmail.com'
     # Add in the message body.
     msg.attach(MIMEText(zois_email, 'plain'))
-    server = smtplib.SMTP("smtp.live.com", 587)
+    server = smtplib.SMTP('smtp.live.com', 587)
     # Hostname to send for this command defaults to the fully qualified
     # domain name of the local host.
     server.ehlo()
@@ -172,34 +172,34 @@ def send_multi_email(zois_email):
     server.starttls()
     server.ehlo()
     # Hide password typing from screen.
-    server.login('zwisss@hotmail.com', getpass.getpass("Password: "))
+    server.login('zwisss@hotmail.com', getpass.getpass('Password: '))
     # Set subject and send the message via the server to maself.
-    msg['Subject'] = "Very important stuff"
-    server.sendmail(msg['From'], "zwisss@hotmail.com",
+    msg['Subject'] = 'Very important stuff'
+    server.sendmail(msg['From'], 'zwisss@hotmail.com',
                     msg.as_string())
-    print("\nMail to maself was successfully sent.")
+    print('\nMail to maself was successfully sent.')
     # Send the message via the server to theon.
-    server.sendmail(msg['From'], "theonzwg@gmail.com",
+    server.sendmail(msg['From'], 'theonzwg@gmail.com',
                     msg.as_string())
-    print("Mail to Porportheon was successfully sent.")
+    print('Mail to Porportheon was successfully sent.')
     # Set subject and send the message via the server to pitsimpriko.
     msg['Subject'] = '[Zizizi] Regarding monthly salary.'
-    server.sendmail(msg['From'], "mariannaleventi@gmail.com",
+    server.sendmail(msg['From'], 'mariannaleventi@gmail.com',
                     msg.as_string())
-    print("Mail to PhD student Marianna, was successfully sent.")
+    print('Mail to PhD student Marianna, was successfully sent.')
     # Set subject and send the message via the server to Hlia.
-    msg['Subject'] = "Σχετικά με τον μηνιαίο μισθό."
-    server.sendmail(msg['From'], "ilias.Anagnostopoulos@intrasoft-intl.com",
+    msg['Subject'] = 'Σχετικά με τον μηνιαίο μισθό.'
+    server.sendmail(msg['From'], 'ilias.Anagnostopoulos@intrasoft-intl.com',
                     msg.as_string())
-    print("Mail to Ilia, was successfully sent.")
+    print('Mail to Ilia, was successfully sent.')
     # Set subject and send the message via the server to Kabremala.
-    msg['Subject'] = "Beekilling! The new profitable job of the future."
-    server.sendmail(msg['From'], "tzogx@hotmail.com",
+    msg['Subject'] = 'Beekilling! The new profitable job of the future.'
+    server.sendmail(msg['From'], 'tzogx@hotmail.com',
                     msg.as_string())
-    print("Mail to Taso, was successfully sent.")
+    print('Mail to Taso, was successfully sent.')
     # Set subject and send the message via the server to Kosta.
-    #msg['Subject'] = "How to fix Neuromailer (easy fix 3-steps)."
-    #server.sendmail(msg['From'], "k.argyropoulos@neurosoft.gr",
+    #msg['Subject'] = 'How to fix Neuromailer (easy fix 3-steps).'
+    #server.sendmail(msg['From'], 'k.argyropoulos@neurosoft.gr',
     #                msg.as_string())
-    #print("Mail to Kosta, was successfully sent.")
+    #print('Mail to Kosta, was successfully sent.')
     server.quit()
