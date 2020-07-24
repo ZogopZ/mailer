@@ -11,14 +11,18 @@
 
 
 from datetime import timedelta
-from render_tools import render_output_0, render_output_2
+from render_tools import *
 import title_tools
 from tools import *
 import timeit
 import sys
 
+output_list = []
 start_time = timeit.default_timer()
 now = datetime.datetime.today()
+# now = datetime.datetime(2020, 7, 24, 18, 25)
+# now = datetime.datetime(2020, 7, 24, 8, 2)
+output_list.append(render_date(now))
 # Stopped working due to Corona-Virus.
 corona_start = datetime.datetime(2020, 3, 14, 9)
 # Started working after Corona-Virus restrictions were lifted.
@@ -43,7 +47,7 @@ set_holidays()
 set_working_status(now)
 # Creates an instance of Title class.
 user_titles = title_tools.Title(random_start_time, last_day_date, now)
-output_0 = render_output_0(user_titles.military_title())
+output_list.append(render_title(user_titles.military_title()))
 
 # Total pay for 6 month internship.
 total_to_be_paid = 580.8 * 6
@@ -55,16 +59,7 @@ pay_per_microsecond_8 = 23.232 / (8 * 60 * 60 * 1000 * 1000)
 so_many_today = last_day_date + timedelta(hours=8) - now
 # This function returns time left in multiple time types.
 tfl = time_left(so_many_today)
-output_1 = 'Η πρακτική μου τελειώνει σε ' + str(tfl[0]) + ' χρόνια ' \
-           + str(tfl[1]) + ' μήνες ' + str(tfl[2]) + ' εβδομάδες ' \
-           + str(tfl[3]) + ' ημέρες ' + '\r\n' + 49 * ' ' \
-           + str(tfl[3]) + ' ώρες ' + str(tfl[4]) + ' λεπτά ' \
-           + str(tfl[5]) + ' δευτερόλεπτα ' + '\r\n' + 49 * ' ' \
-           + str(tfl[6]) + ' χιλιοστά του δευτερολέπτου και ' \
-           + str(tfl[7]) + ' μικροδευτερόλεπτα.\r\n'
-
-
-output_2 = ''
+output_list.append(render_time(tfl))
 time_worked_today = 0
 # If I am working right now, calculate pay earned today.
 if get_working_status():
@@ -72,18 +67,12 @@ if get_working_status():
     time_worked_today = now - datetime.datetime(now.year,
                                                 now.month,
                                                 now.day, 9)
-    # Render  message's 2 output.
-    output_2 = render_output_2(time_worked_today, pay_per_microsecond_8)
-
 elif not get_working_status():
     if now < work_start:
         time_worked_today = now - now
-        output_2 = '\nΑυτήν την στιγμή δεν δουλεύω και αράζω πέτσα. ' \
-                   'Σε λιγάκι πιάνουμε δουλειά...\r\n'
     elif now > work_end:
         time_worked_today = work_end - work_start
-        output_2 = '\nΑυτήν την στιγμή δεν δουλεύω και αράζω πέτσα.' \
-                   'Σήμερα βγήκε το μεροκάματο των 23,232 ευρώ. \r\n'
+output_list.append(render_work(time_worked_today, pay_per_microsecond_8))
 
 time_worked = 0
 days_worked = 0
@@ -113,24 +102,14 @@ elif (euro_made / 580.8) > 1:
 # Exactly one month's work.
 elif (euro_made / 580.8) == 1:
     monthly_wage_earned = 580.8
-output_3 = 'Μηνιαία έχω βγάλει ' + str(monthly_wage_earned) + \
-           ' ευρώ. (Προσοχή! Στο ποσό αυτό συνυπολογίζονται οι 2-5' \
-           ' μέρες που πληρώνομαι' \
-           ' κάθε μήνα χωρίς να δουλεύω...)\r\n'
-output_4 = 'Συνολικά έχω βγάλει ' + str(euro_made) + \
-           ' ευρώ και έχω δουλέψει ' + \
-           str(days_worked) + \
-           ' ημέρες, συνυπολογίζοντας την σημερινή.\r\n\r\n'
-signature = 'Regards,\r\nZois Zogopoulos\r\n'
-pySignature = 113 * ' ' + 'This is an automated email from Python.\r\n'
+output_list.append(render_wage(monthly_wage_earned))
+output_list.append(render_total(euro_made, days_worked))
+output_list.append(render_signatures())
 
-dateString = 'Ημερομηνία: ' + str(now.date()) + \
-             '\r\nΏρα: ' + str(now.time()) + '\r\n\r\n'
-zois_email = dateString + \
-             output_0 + output_1 + output_2 + output_3 + output_4 + \
-             signature + pySignature
-
-print(zois_email)
+zois_email = ''
+for items in output_list:
+    print(items[0])
+    zois_email += items[1]
 if len(sys.argv) > 1 and sys.argv[1] == '-s':
     send_solo_email(zois_email)
 else:

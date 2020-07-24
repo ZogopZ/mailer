@@ -16,6 +16,7 @@ class Title:
         self.evaluation = lapsed_time/full_time
 
     def military_title(self):
+        title_list = []
         title = ''
         img_path = ''
         enc_image = ''
@@ -81,6 +82,6 @@ class Title:
         with open(img_path, "rb") as img_file:
             enc_image = '<img src=\"data:image/png;base64,' +\
                         base64.b64encode(img_file.read()).decode('utf-8') +\
-                        '" width="50" height="50" alt="base64 test">'
-        title = title + enc_image
-        return title
+                        '" width="50" height="70" alt="base64 test">'
+        title_list.extend([title, img_path, enc_image])
+        return title_list
