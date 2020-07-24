@@ -197,9 +197,4 @@ def send_multi_email(zois_email):
     server.sendmail(msg['From'], 'tzogx@hotmail.com',
                     msg.as_string())
     print('Mail to Taso, was successfully sent.')
-    # Set subject and send the message via the server to Kosta.
-    #msg['Subject'] = 'How to fix Neuromailer (easy fix 3-steps).'
-    #server.sendmail(msg['From'], 'k.argyropoulos@neurosoft.gr',
-    #                msg.as_string())
-    #print('Mail to Kosta, was successfully sent.')
     server.quit()
