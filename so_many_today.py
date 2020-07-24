@@ -136,6 +136,7 @@ if len(sys.argv) > 1 and sys.argv[1] == '-s':
 else:
     send_multi_email(zois_email)
 stop_time = timeit.default_timer()
+
 execution_time = stop_time - start_time
 # It returns time in seconds.
 print('-- mailer was Executed in ' + str('{:.4f}'.format(execution_time)) +

@@ -3,6 +3,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import smtplib
 import getpass
+import base64
 
 working_dates = []
 weekends = []
@@ -129,13 +130,18 @@ def paid_days_off(now):
     return off_days_paid
 
 def send_solo_email(zois_email):
-    solo_email = input('Please gib e-mail: ')
+    html = '<html><body><p>' + zois_email + '</p></body></html>'
+    part2 = MIMEText(html, "html")
+    print(zois_email)
+    # solo_email = input('Please gib e-mail: ')
+    solo_email = 'zwisss@hotmail.com'  # DELETE THIS!!!
     # Create message object instance.
-    msg = MIMEMultipart()
+    msg = MIMEMultipart('alternative')
     # Setup the parameters of the message.
     msg['From'] = 'zwisss@hotmail.com'
     # Add in the message body.
-    msg.attach(MIMEText(zois_email, 'plain'))
+    # msg.attach(MIMEText(zois_email, 'plain'))
+    msg.attach(part2)  # DELETE THIS!!!
     server = smtplib.SMTP('smtp.live.com', 587)
     # Hostname to send for this command defaults to the fully qualified
     # domain name of the local host.
