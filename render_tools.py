@@ -12,9 +12,18 @@ def render_signatures():
                         'This is an automated email from Python.\r\n'
     signatures_html = """
     <p>Regards,<br>Zois Zogopoulos</p>
-    <p>If you have any suggestions please
-        <a href="tel:6979156833"> contact</a> 
-    support.</p>
+    <p><br></p>
+    <p style="font-size:12px">If you have any suggestions please contact 
+    support:<br>
+        <ul style="font-size:12px">    
+            <li>on mobile call zois by pressing 
+                <a href="tel:6979156833">here</a>.
+            </li>
+            <li>or send an email by pressing 
+                <a href="mailto:zwisss@hotmail.com">here</a>.
+            </li>
+        </ul>
+    </p>
     <p style="text-align:right">This is an automated email from Python.</p>
     """
     return [signatures_string, signatures_html]
