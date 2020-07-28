@@ -3,12 +3,6 @@
 # moved to 1/6/2020 - 31/07/2020.  Also calculates how much money was
 # earned on current date and time.
 
-# -- Start of deprecated comments.
-# Calculates time left until date 13/05/2020 and 17:00 Athens time.
-# Also calculates how much money earned today and how much money earned
-# since the start of the internship.
-# -- End of deprecated comments.
-
 
 from datetime import timedelta
 from render_tools import *

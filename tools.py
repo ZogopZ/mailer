@@ -98,11 +98,6 @@ def set_holidays():
                 datetime.date(2020, 1, 1),
                 datetime.date(2020, 1, 6),
                 datetime.date(2020, 3, 2),
-                # Commented due to Corona-Virus.
-                # datetime.date(2020, 3, 25),
-                # datetime.date(2020, 4, 17),
-                # datetime.date(2020, 4, 20),
-                # datetime.date(2020, 5, 1),
                 datetime.date(2020, 6, 8),
                 ]
 
