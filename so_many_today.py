@@ -82,8 +82,8 @@ time_worked += time_worked_today.total_seconds()
 # Convert to microseconds.
 microseconds_passed = time_worked * (10**6)
 microseconds_passed_off_days = paid_days_off(now) * 8 * 60 * 60 * (10**6)
-euro_made = (microseconds_passed+microseconds_passed_off_days) * \
-            pay_per_microsecond_8
+euro_made = (microseconds_passed+microseconds_passed_off_days) \
+            * pay_per_microsecond_8
 monthly_wage_earned = 0
 # First month work was less than a full months work.
 if (euro_made / 580.8) < 1:
@@ -112,5 +112,5 @@ stop_time = timeit.default_timer()
 
 execution_time = stop_time - start_time
 # It returns time in seconds.
-print('-- mailer was Executed in ' + str('{:.4f}'.format(execution_time)) +
-      ' seconds --')
+print('-- mailer was Executed in ' + str('{:.4f}'.format(execution_time)) \
+      + ' seconds --')

@@ -1,15 +1,15 @@
 def render_date(now):
-    date_string = 'Ημερομηνία: ' + str(now.date()) + '\r\n' + \
-                  'Ώρα: ' + str(now.time()) + '\r\n'
+    date_string = 'Ημερομηνία: ' + str(now.date()) + '\r\n' \
+                  + 'Ώρα: ' + str(now.time()) + '\r\n'
     date_html = """
     <p>Ημερομηνία: {0}<br>Ώρα: {1}</p>
     """.format(str(now.date()), str(now.time()))
     return [date_string, date_html]
 
 def render_signatures():
-    signatures_string = 'Regards,\r\nZois Zogopoulos\r\n' + \
-                        113 * ' ' + \
-                        'This is an automated email from Python.\r\n'
+    signatures_string = 'Regards,\r\nZois Zogopoulos\r\n' \
+                        + 113 * ' ' \
+                        + 'This is an automated email from Python.\r\n'
     signatures_html = """
     <p>Regards,<br>Zois Zogopoulos</p>
     <p><br></p>
@@ -30,18 +30,18 @@ def render_signatures():
 
 
 def render_time(tfl):
-    time_string = 'Η πρακτική μου τελειώνει σε ' + \
-                  str(tfl[0]) + ' χρόνια ' + \
-                  str(tfl[1]) + ' μήνες ' + \
-                  str(tfl[2]) + ' εβδομάδες ' + \
-                  str(tfl[3]) + ' ημέρες' + '\r\n' + \
-                  28 * ' ' + \
-                  str(tfl[3]) + ' ώρες ' + \
-                  str(tfl[4]) + ' λεπτά ' + \
-                  str(tfl[5]) + ' δευτερόλεπτα ' + '\r\n' + \
-                  28 * ' ' + \
-                  str(tfl[6]) + ' χιλιοστά του δευτερολέπτου και ' + \
-                  str(tfl[7]) + ' μικροδευτερόλεπτα.'
+    time_string = 'Η πρακτική μου τελειώνει σε ' \
+                  + str(tfl[0]) + ' χρόνια ' \
+                  + str(tfl[1]) + ' μήνες ' \
+                  + str(tfl[2]) + ' εβδομάδες ' \
+                  + str(tfl[3]) + ' ημέρες' + '\r\n' \
+                  + 28 * ' ' \
+                  + str(tfl[3]) + ' ώρες ' \
+                  + str(tfl[4]) + ' λεπτά ' \
+                  + str(tfl[5]) + ' δευτερόλεπτα ' + '\r\n' \
+                  + 28 * ' ' \
+                  + str(tfl[6]) + ' χιλιοστά του δευτερολέπτου και ' \
+                  + str(tfl[7]) + ' μικροδευτερόλεπτα.'
     time_html = """
                 <table cellspacing="0" cellpadding="0">
                 <tbody>
@@ -99,22 +99,22 @@ def render_time(tfl):
     return [time_string, time_html]
 
 def render_title(title_list):
-    title_string = 'Τίτλος:' + ' ' + \
-                   title_list[0] + \
-                   ' Ζώης Ζωγόπουλος\r\n'
-    title_html = '<table><tbody><tr><td>Τίτλος:</td>' + \
-                 '<td>' + title_list[0] + '</td>' + \
-                 '<td>Ζώης Ζωγόπουλος</td>' + \
-                 '<td>&ensp;</td>' + \
-                 '<td>' + title_list[2] + '</td>' + \
-                 '</tr></tbody></table>'
+    title_string = 'Τίτλος:' + ' ' \
+                   + title_list[0] \
+                   + ' Ζώης Ζωγόπουλος\r\n'
+    title_html = '<table><tbody><tr><td>Τίτλος:</td>' \
+                 + '<td>' + title_list[0] + '</td>' \
+                 + '<td>Ζώης Ζωγόπουλος</td>' \
+                 + '<td>&ensp;</td>' \
+                 + '<td>' + title_list[2] + '</td>' \
+                 + '</tr></tbody></table>'
     return [title_string, title_html]
 
 def render_total(euro_made, days_worked):
-    total_string = 'Συνολικά έχω βγάλει ' + str(euro_made) + \
-                   ' ευρώ και έχω δουλέψει ' + \
-                   str(days_worked) + \
-                   ' ημέρες, συνυπολογίζοντας την σημερινή.\r\n'
+    total_string = 'Συνολικά έχω βγάλει ' + str(euro_made) \
+                   + ' ευρώ και έχω δουλέψει ' \
+                   + str(days_worked) \
+                   + ' ημέρες, συνυπολογίζοντας την σημερινή.\r\n'
     total_html = """
     Συνολικά έχω βγάλει {0} ευρώ και έχω δουλέψει {1} ημέρες, συνυπολογίζοντας
     την σημερινή.</p>
@@ -122,10 +122,9 @@ def render_total(euro_made, days_worked):
     return [total_string, total_html]
 
 def render_wage(monthly_wage_earned):
-    wage_string = 'Μηνιαία έχω βγάλει ' + str(monthly_wage_earned) + \
-                  ' ευρώ. (Προσοχή! Στο ποσό αυτό συνυπολογίζονται οι 2-5' \
-                  ' μέρες που πληρώνομαι' \
-                  ' κάθε μήνα χωρίς να δουλεύω...)'
+    wage_string = 'Μηνιαία έχω βγάλει ' + str(monthly_wage_earned) \
+                  + ' ευρώ. (Προσοχή! Στο ποσό αυτό συνυπολογίζονται οι 2-5' \
+                  + ' μέρες που πληρώνομαι κάθε μήνα χωρίς να δουλεύω...)'
     wage_html = """
     Μηνιαία έχω βγάλει {0} ευρώ. (Προσοχή! Στο ποσό αυτό συνυπολογίζονται οι
     2-5 μέρες που πληρώνομαι κάθε μήνα χωρίς να δουλεύω...)<br>
