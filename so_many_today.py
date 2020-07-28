@@ -61,6 +61,15 @@ so_many_today = last_day_date + timedelta(hours=8) - now
 # This function returns time left in multiple time types.
 tfl = time_left(so_many_today)
 output_list.append(render_time(tfl))
+tag_dictionary.update({'years': tfl[0],
+                       'months': tfl[1],
+                       'weeks': tfl[2],
+                       'days': tfl[3],
+                       'hours': tfl[4],
+                       'minutes': tfl[5],
+                       'seconds': tfl[6],
+                       'milliseconds': tfl[7],
+                       'microseconds': tfl[8]})
 time_worked_today = 0
 # If I am working right now, calculate pay earned today.
 if get_working_status():
@@ -114,18 +123,16 @@ tag_dictionary.update({'total': rm_this_3[0]})
 rm_this_4 = render_signatures()
 output_list.append(rm_this_4)
 tag_dictionary.update({'signatures': rm_this_4[0]})
-
-print(tag_dictionary)
-zois_email = ''
-for items in output_list:
-    print(items[0])
-    zois_email += items[1]
-if len(sys.argv) > 1 and sys.argv[1] == '-s':
-    send_solo_email(zois_email)
-else:
-    send_multi_email(zois_email)
+populate_template(tag_dictionary)
+# zois_email = ''
+# for items in output_list:
+#     print(items[0])
+#     zois_email += items[1]
+# if len(sys.argv) > 1 and sys.argv[1] == '-s':
+#     send_solo_email(zois_email)
+# else:
+#     send_multi_email(zois_email)
 stop_time = timeit.default_timer()
-
 execution_time = stop_time - start_time
 # It returns time in seconds.
 print('-- mailer was Executed in ' + str('{:.4f}'.format(execution_time)) \

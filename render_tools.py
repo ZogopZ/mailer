@@ -1,3 +1,6 @@
+import jinja2
+
+
 def render_date(now):
     date_string = 'Ημερομηνία: ' + str(now.date()) + '\r\n' \
                   + 'Ώρα: ' + str(now.time()) + '\r\n'
@@ -197,3 +200,24 @@ def render_work(time_worked_today, pay_per_microsecond_8):
         """.format(str(euro_made_today), hours_string, minutes_string,
                    seconds_string)
     return [work_string, work_html]
+
+def populate_template(input_dictionary):
+    with open('assets/templates/template.html', 'r') as template_file, \
+            open('assets/ignore/outfile.html', 'w+') as output_file:
+        html_in = template_file.read()
+        jinja_template = jinja2.Template(html_in)
+        html_out = jinja_template.render(
+            date=input_dictionary['date'],
+            time=input_dictionary['time'],
+            title=input_dictionary['title'],
+            years=input_dictionary['years'],
+            months=input_dictionary['months'],
+            weeks=input_dictionary['weeks'],
+            days=input_dictionary['days'],
+            hours=input_dictionary['hours'],
+            minutes=input_dictionary['minutes'],
+            milliseconds=input_dictionary['milliseconds'],
+            microseconds=input_dictionary['microseconds'],
+            base64_content=input_dictionary['encoded_image'])
+        output_file.write(html_out)
+        return
