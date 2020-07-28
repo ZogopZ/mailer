@@ -11,12 +11,17 @@ from tools import *
 import timeit
 import sys
 
-output_list = []
+
 start_time = timeit.default_timer()
+
+output_list = []
+tag_dictionary = {}
 now = datetime.datetime.today()
 # now = datetime.datetime(2020, 7, 24, 18, 25)
 # now = datetime.datetime(2020, 7, 24, 8, 2)
 output_list.append(render_date(now))
+tag_dictionary.update({'date': now.date(),
+                       'time': now.time()})
 # Stopped working due to Corona-Virus.
 corona_start = datetime.datetime(2020, 3, 14, 9)
 # Started working after Corona-Virus restrictions were lifted.
@@ -42,7 +47,9 @@ set_working_status(now)
 # Creates an instance of Title class.
 user_titles = title_tools.Title(random_start_time, last_day_date, now)
 output_list.append(render_title(user_titles.military_title()))
-
+tag_dictionary.update({'title': user_titles.title,
+                       'image_path': user_titles.image_path,
+                       'encoded_image': user_titles.encoded_image})
 # Total pay for 6 month internship.
 total_to_be_paid = 580.8 * 6
 # 23.232 euro per day is defined by corresponding company.
@@ -66,7 +73,9 @@ elif not get_working_status():
         time_worked_today = now - now
     elif now > work_end:
         time_worked_today = work_end - work_start
-output_list.append(render_work(time_worked_today, pay_per_microsecond_8))
+rm_this_1 = render_work(time_worked_today, pay_per_microsecond_8)
+output_list.append(rm_this_1)
+tag_dictionary.update({'work': rm_this_1[0]})
 
 time_worked = 0
 days_worked = 0
@@ -96,10 +105,17 @@ elif (euro_made / 580.8) > 1:
 # Exactly one month's work.
 elif (euro_made / 580.8) == 1:
     monthly_wage_earned = 580.8
-output_list.append(render_wage(monthly_wage_earned))
-output_list.append(render_total(euro_made, days_worked))
-output_list.append(render_signatures())
+rm_this_2 = render_wage(monthly_wage_earned)
+output_list.append(rm_this_2)
+tag_dictionary.update({'wage': rm_this_2[0]})
+rm_this_3 = render_total(euro_made, days_worked)
+output_list.append(rm_this_3)
+tag_dictionary.update({'total': rm_this_3[0]})
+rm_this_4 = render_signatures()
+output_list.append(rm_this_4)
+tag_dictionary.update({'signatures': rm_this_4[0]})
 
+print(tag_dictionary)
 zois_email = ''
 for items in output_list:
     print(items[0])

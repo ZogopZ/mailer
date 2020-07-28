@@ -3,6 +3,10 @@ import base64
 
 class Title:
 
+    title = ''
+    image_path = ''
+    encoded_image = ''
+
     def __init__(self, start_time, end_time, current_time):
         # Calculate the time that the user will be working from the
         # start until the end of his contract.
@@ -84,4 +88,7 @@ class Title:
                         + base64.b64encode(img_file.read()).decode('utf-8') \
                         + '" width="50" height="75" alt="base64 test">'
         title_list.extend([title, img_path, enc_image])
+        self.title = title
+        self.image_path = img_path
+        self.encoded_image = enc_image
         return title_list
