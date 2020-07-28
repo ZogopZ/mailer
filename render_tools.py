@@ -133,19 +133,19 @@ def render_wage(monthly_wage_earned):
     return [wage_string, wage_html]
 
 def render_work(time_worked_today, pay_per_microsecond_8):
-    work_eval = str(time_worked_today)
+    work_evaluator = str(time_worked_today)
     work_string = ''
     work_html = ''
-    if work_eval == '8:00:00':
-        work_string += 'Αυτήν την στιγμή δεν δουλεύω και αράζω πέτσα.' + \
-                       'Σήμερα βγήκε το μεροκάματο των 23,232 ευρώ.'
+    if work_evaluator == '8:00:00':
+        work_string += 'Αυτήν την στιγμή δεν δουλεύω και αράζω πέτσα.' \
+                       + 'Σήμερα βγήκε το μεροκάματο των 23,232 ευρώ.'
         work_html = """
         Αυτήν την στιγμή δεν δουλεύω και αράζω πέτσα. Σήμερα βγήκε το
         μεροκάματο των 23,232 ευρώ.<br>
         """
-    elif work_eval == '0:00:00':
-        work_string += 'Αυτήν την στιγμή δεν δουλεύω και αράζω πέτσα. ' + \
-                      'Σε λιγάκι πιάνουμε δουλειά...'
+    elif work_evaluator == '0:00:00':
+        work_string += 'Αυτήν την στιγμή δεν δουλεύω και αράζω πέτσα. ' \
+                       + 'Σε λιγάκι πιάνουμε δουλειά...'
         work_html = """
         Αυτήν την στιγμή δεν δουλεύω και αράζω πέτσα. Σε λιγάκι πιάνουμε
         δουλειά...<br>
@@ -182,15 +182,17 @@ def render_work(time_worked_today, pay_per_microsecond_8):
         seconds_string = ''
         # Need for plural output.
         if seconds_worked_today > 1 or seconds_worked_today == 0:
-            seconds_string = ' και ' + str(seconds_worked_today) + ' δευτερόλεπτα'
+            seconds_string = ' και ' + str(seconds_worked_today) \
+                             + 'δευτερόλεπτα'
         # Need for singular output.
         elif seconds_worked_today == 1:
-            seconds_string = ' και ' + str(seconds_worked_today) + ' δευτερόλεπτο'
+            seconds_string = ' και ' + str(seconds_worked_today) \
+                             + 'δευτερόλεπτο'
         euro_made_today = microseconds_passed_today * pay_per_microsecond_8
-        work_string = 'Σήμερα έχω ήδη βγάλει ' + \
-                      str(euro_made_today) + ' ευρώ' + \
-                      ' και έχω δουλέψει' + \
-                      hours_string + minutes_string + seconds_string + '.'
+        work_string = 'Σήμερα έχω ήδη βγάλει ' \
+                      + str(euro_made_today) + ' ευρώ' \
+                      + ' και έχω δουλέψει' \
+                      + hours_string + minutes_string + seconds_string + '.'
         work_html = """
         <p>Σήμερα έχω ήδη βγάλει {0} ευρώ και έχω δουλέψει {1} {2} {3}.<br>
         """.format(str(euro_made_today), hours_string, minutes_string,
