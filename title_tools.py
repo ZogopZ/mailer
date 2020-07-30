@@ -18,6 +18,7 @@ class Title:
         lapsed_time = (current_time - start_time).total_seconds()
         # Calculate the percentage of time passed.
         self.evaluation = lapsed_time/full_time
+        return
 
     def military_title(self):
         title_list = []
@@ -87,8 +88,7 @@ class Title:
             enc_image = '<img src=\"data:image/png;base64,' \
                         + base64.b64encode(img_file.read()).decode('utf-8') \
                         + 'alt="base64_error">'
-        title_list.extend([title, img_path, enc_image])
         self.title = title
         self.image_path = img_path
         self.encoded_image = enc_image
-        return title_list
+        return

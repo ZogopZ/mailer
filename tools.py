@@ -124,7 +124,6 @@ def paid_days_off(now):
     return off_days_paid
 
 def send_solo_email(zois_email):
-    html = '<html><body>' + zois_email + '</body></html>'
     solo_email = input('Please gib e-mail: ')
     # Create message object instance.
     msg = MIMEMultipart('alternative')
@@ -132,7 +131,7 @@ def send_solo_email(zois_email):
     msg['From'] = 'zwisss@hotmail.com'
     # Add in the message body.
     # msg.attach(MIMEText(zois_email, 'plain'))
-    msg.attach(MIMEText(html, "html"))  # DELETE THIS!!!
+    msg.attach(MIMEText(zois_email, "html"))  # DELETE THIS!!!
     server = smtplib.SMTP('smtp.live.com', 587)
     # Hostname to send for this command defaults to the fully qualified
     # domain name of the local host.
@@ -155,14 +154,13 @@ def send_solo_email(zois_email):
     server.quit()
 
 def send_multi_email(zois_email):
-    html = '<html><body>' + zois_email + '</body></html>'
     # Create message object instance.
     msg = MIMEMultipart('alternative')
     # Setup the parameters of the message.
     msg['From'] = 'zwisss@hotmail.com'
     # Add in the message body.
     # msg.attach(MIMEText(zois_email, 'plain'))
-    msg.attach(MIMEText(html, "html"))  # DELETE THIS!!!
+    msg.attach(MIMEText(zois_email, "html"))  # DELETE THIS!!!
     server = smtplib.SMTP('smtp.live.com', 587)
     # Hostname to send for this command defaults to the fully qualified
     # domain name of the local host.

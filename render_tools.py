@@ -1,119 +1,57 @@
 import jinja2
+import title_tools
 
 
-def render_date(now):
+def render_datetime(now, input_dictionary):
     date_string = 'Ημερομηνία: ' + str(now.date()) + '\r\n' \
                   + 'Ώρα: ' + str(now.time()) + '\r\n'
-    date_html = """
-    <p>Ημερομηνία: {0}<br>Ώρα: {1}</p>
-    """.format(str(now.date()), str(now.time()))
-    return [date_string, date_html]
+    input_dictionary.update({'date': now.date(),
+                             'time': now.time()})
+    return date_string
+
 
 def render_signatures():
     signatures_string = 'Regards,\r\nZois Zogopoulos\r\n' \
                         + 113 * ' ' \
                         + 'This is an automated email from Python.\r\n'
-    signatures_html = """
-    <p>Regards,<br>Zois Zogopoulos</p>
-    <p><br></p>
-    <p style="font-size:12px">If you have any suggestions please contact 
-    support:<br>
-        <ul style="font-size:12px">    
-            <li>on mobile call zois by pressing 
-                <a href="tel:6979156833">here</a>.
-            </li>
-            <li>or send an email by pressing 
-                <a href="mailto:zwisss@hotmail.com">here</a>.
-            </li>
-        </ul>
-    </p>
-    <p style="text-align:right">This is an automated email from Python.</p>
-    """
-    return [signatures_string, signatures_html]
+    return signatures_string
 
 
-def render_time(tfl):
+def render_time(tfl, input_dictionary):
     time_string = 'Η πρακτική μου τελειώνει σε ' \
                   + str(tfl[0]) + ' χρόνια ' \
                   + str(tfl[1]) + ' μήνες ' \
                   + str(tfl[2]) + ' εβδομάδες ' \
                   + str(tfl[3]) + ' ημέρες' + '\r\n' \
                   + 28 * ' ' \
-                  + str(tfl[3]) + ' ώρες ' \
-                  + str(tfl[4]) + ' λεπτά ' \
-                  + str(tfl[5]) + ' δευτερόλεπτα ' + '\r\n' \
+                  + str(tfl[4]) + ' ώρες ' \
+                  + str(tfl[5]) + ' λεπτά ' \
+                  + str(tfl[6]) + ' δευτερόλεπτα ' + '\r\n' \
                   + 28 * ' ' \
-                  + str(tfl[6]) + ' χιλιοστά του δευτερολέπτου και ' \
-                  + str(tfl[7]) + ' μικροδευτερόλεπτα.'
-    time_html = """
-                <table cellspacing="0" cellpadding="0">
-                <tbody>
-                <tr><td>&nbsp;</td></tr>
-                <tr>
-                    <td>Η πρακτική μου τελειώνει σε</td>
-                    <td>&ensp;</td>
-                    <td>
-                        <table>
-                        <tbody>
-                        <tr>
-                            <td>{0} χρόνια</td>
-                            <td>{1} μήνες</td>
-                            <td>{2} εβδομάδες</td>
-                            <td>{3} ημέρες</td>
-                        </tr>
-                        </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr>                        
-                    <td></td>
-                    <td></td>
-                    <td>
-                        <table>
-                        <tbody>
-                        <tr>
-                            <td>{4} ώρες</td>
-                            <td>{5} λεπτά</td>
-                            <td>{6} δευτερόλεπτα</td>
-                        </tr>
-                        </tbody>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                       <table>
-                       <tbody>
-                        <tr>
-                            <td>{7} χιλιοστά του δευτερολέπτου και</td>
-                            <td>{8} μικροδευτερόλεπτα.</td>
-                        </tr>
-                        </tbody>
-                        </table>
-                    </td>
-                </tr>
-                </tbody>
-                </table>
-                """.format(str(tfl[0]), str(tfl[1]), str(tfl[2]), str(tfl[3]),
-                           str(tfl[4]), str(tfl[5]), str(tfl[6]),
-                           str(tfl[7]), str(tfl[8]))
-    return [time_string, time_html]
+                  + str(tfl[7]) + ' χιλιοστά του δευτερολέπτου και ' \
+                  + str(tfl[8]) + ' μικροδευτερόλεπτα.'
+    input_dictionary.update({'years': tfl[0],
+                             'months': tfl[1],
+                             'weeks': tfl[2],
+                             'days': tfl[3],
+                             'hours': tfl[4],
+                             'minutes': tfl[5],
+                             'seconds': tfl[6],
+                             'milliseconds': tfl[7],
+                             'microseconds': tfl[8]})
+    return time_string
 
-def render_title(title_list):
-    title_string = 'Τίτλος:' + ' ' \
-                   + title_list[0] \
-                   + ' Ζώης Ζωγόπουλος\r\n'
-    title_html = '<table><tbody><tr><td>Τίτλος:</td>' \
-                 + '<td>' + title_list[0] + '</td>' \
-                 + '<td>Ζώης Ζωγόπουλος</td>' \
-                 + '<td>&ensp;</td>' \
-                 + '<td>' + title_list[2] + '</td>' \
-                 + '</tr></tbody></table>'
-    return [title_string, title_html]
+def render_title(user_titles, input_dictionary):
+    title_string = 'Τίτλος: ' \
+                   + user_titles.title + ' ' \
+                   + 'Ζώης Ζωγόπουλος ' \
+                   + '+ image at ' + '\'' + user_titles.image_path + '\'\n'
+    input_dictionary.update({'title': user_titles.title,
+                             'image_path': user_titles.image_path,
+                             'encoded_image': user_titles.encoded_image})
+    return title_string
 
-def render_total(euro_made, days_worked):
+def render_total(euro_made, days_worked, input_dictionary):
     total_string = 'Συνολικά έχω βγάλει ' + str(euro_made) \
                    + ' ευρώ και έχω δουλέψει ' \
                    + str(days_worked) \
@@ -122,9 +60,10 @@ def render_total(euro_made, days_worked):
     Συνολικά έχω βγάλει {0} ευρώ και έχω δουλέψει {1} ημέρες, συνυπολογίζοντας
     την σημερινή.</p>
     """.format(str(euro_made), str(days_worked))
-    return [total_string, total_html]
+    input_dictionary['total'] = total_html
+    return total_string
 
-def render_wage(monthly_wage_earned):
+def render_wage(monthly_wage_earned, input_dictionary):
     wage_string = 'Μηνιαία έχω βγάλει ' + str(monthly_wage_earned) \
                   + ' ευρώ. (Προσοχή! Στο ποσό αυτό συνυπολογίζονται οι 2-5' \
                   + ' μέρες που πληρώνομαι κάθε μήνα χωρίς να δουλεύω...)'
@@ -132,9 +71,10 @@ def render_wage(monthly_wage_earned):
     Μηνιαία έχω βγάλει {0} ευρώ. (Προσοχή! Στο ποσό αυτό συνυπολογίζονται οι
     2-5 μέρες που πληρώνομαι κάθε μήνα χωρίς να δουλεύω...)<br>
     """.format(str(monthly_wage_earned))
-    return [wage_string, wage_html]
+    input_dictionary['wage'] = wage_html
+    return wage_string
 
-def render_work(time_worked_today, pay_per_microsecond_8):
+def render_work(time_worked_today, pay_per_microsecond_8, input_dictionary):
     work_evaluator = str(time_worked_today)
     work_string = ''
     work_html = ''
@@ -185,7 +125,7 @@ def render_work(time_worked_today, pay_per_microsecond_8):
         # Need for plural output.
         if seconds_worked_today > 1 or seconds_worked_today == 0:
             seconds_string = ' και ' + str(seconds_worked_today) \
-                             + 'δευτερόλεπτα'
+                             + ' δευτερόλεπτα'
         # Need for singular output.
         elif seconds_worked_today == 1:
             seconds_string = ' και ' + str(seconds_worked_today) \
@@ -196,10 +136,11 @@ def render_work(time_worked_today, pay_per_microsecond_8):
                       + ' και έχω δουλέψει' \
                       + hours_string + minutes_string + seconds_string + '.'
         work_html = """
-        <p>Σήμερα έχω ήδη βγάλει {0} ευρώ και έχω δουλέψει {1} {2} {3}.<br>
+        Σήμερα έχω ήδη βγάλει {0} ευρώ και έχω δουλέψει {1} {2} {3}.<br>
         """.format(str(euro_made_today), hours_string, minutes_string,
                    seconds_string)
-    return [work_string, work_html]
+        input_dictionary['work'] = work_html
+    return work_string
 
 def populate_template(input_dictionary):
     with open('assets/templates/template.html', 'r') as template_file, \
@@ -210,6 +151,7 @@ def populate_template(input_dictionary):
             date=input_dictionary['date'],
             time=input_dictionary['time'],
             title=input_dictionary['title'],
+            base64_content=input_dictionary['encoded_image'],
             years=input_dictionary['years'],
             months=input_dictionary['months'],
             weeks=input_dictionary['weeks'],
@@ -218,6 +160,8 @@ def populate_template(input_dictionary):
             minutes=input_dictionary['minutes'],
             milliseconds=input_dictionary['milliseconds'],
             microseconds=input_dictionary['microseconds'],
-            base64_content=input_dictionary['encoded_image'])
+            work=input_dictionary['work'],
+            wage=input_dictionary['wage'],
+            total=input_dictionary['total'])
         output_file.write(html_out)
         return

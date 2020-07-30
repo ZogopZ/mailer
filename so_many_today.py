@@ -19,9 +19,7 @@ tag_dictionary = {}
 now = datetime.datetime.today()
 # now = datetime.datetime(2020, 7, 24, 18, 25)
 # now = datetime.datetime(2020, 7, 24, 8, 2)
-output_list.append(render_date(now))
-tag_dictionary.update({'date': now.date(),
-                       'time': now.time()})
+print(render_datetime(now, tag_dictionary))
 # Stopped working due to Corona-Virus.
 corona_start = datetime.datetime(2020, 3, 14, 9)
 # Started working after Corona-Virus restrictions were lifted.
@@ -46,10 +44,9 @@ set_holidays()
 set_working_status(now)
 # Creates an instance of Title class.
 user_titles = title_tools.Title(random_start_time, last_day_date, now)
-output_list.append(render_title(user_titles.military_title()))
-tag_dictionary.update({'title': user_titles.title,
-                       'image_path': user_titles.image_path,
-                       'encoded_image': user_titles.encoded_image})
+user_titles.military_title()
+print(render_title(user_titles, tag_dictionary))
+
 # Total pay for 6 month internship.
 total_to_be_paid = 580.8 * 6
 # 23.232 euro per day is defined by corresponding company.
@@ -60,16 +57,8 @@ pay_per_microsecond_8 = 23.232 / (8 * 60 * 60 * 1000 * 1000)
 so_many_today = last_day_date + timedelta(hours=8) - now
 # This function returns time left in multiple time types.
 tfl = time_left(so_many_today)
-output_list.append(render_time(tfl))
-tag_dictionary.update({'years': tfl[0],
-                       'months': tfl[1],
-                       'weeks': tfl[2],
-                       'days': tfl[3],
-                       'hours': tfl[4],
-                       'minutes': tfl[5],
-                       'seconds': tfl[6],
-                       'milliseconds': tfl[7],
-                       'microseconds': tfl[8]})
+print(render_time(tfl, tag_dictionary))
+
 time_worked_today = 0
 # If I am working right now, calculate pay earned today.
 if get_working_status():
@@ -82,9 +71,7 @@ elif not get_working_status():
         time_worked_today = now - now
     elif now > work_end:
         time_worked_today = work_end - work_start
-rm_this_1 = render_work(time_worked_today, pay_per_microsecond_8)
-output_list.append(rm_this_1)
-tag_dictionary.update({'work': rm_this_1[0]})
+print(render_work(time_worked_today, pay_per_microsecond_8, tag_dictionary))
 
 time_worked = 0
 days_worked = 0
@@ -114,26 +101,18 @@ elif (euro_made / 580.8) > 1:
 # Exactly one month's work.
 elif (euro_made / 580.8) == 1:
     monthly_wage_earned = 580.8
-rm_this_2 = render_wage(monthly_wage_earned)
-output_list.append(rm_this_2)
-tag_dictionary.update({'wage': rm_this_2[0]})
-rm_this_3 = render_total(euro_made, days_worked)
-output_list.append(rm_this_3)
-tag_dictionary.update({'total': rm_this_3[0]})
-rm_this_4 = render_signatures()
-output_list.append(rm_this_4)
-tag_dictionary.update({'signatures': rm_this_4[0]})
+print(render_wage(monthly_wage_earned, tag_dictionary))
+print(render_total(euro_made, days_worked, tag_dictionary))
+print(render_signatures())
 populate_template(tag_dictionary)
-# zois_email = ''
-# for items in output_list:
-#     print(items[0])
-#     zois_email += items[1]
-# if len(sys.argv) > 1 and sys.argv[1] == '-s':
-#     send_solo_email(zois_email)
-# else:
-#     send_multi_email(zois_email)
+with open('assets/ignore/outfile.html', 'r') as html_file:
+    zois_email = html_file.read()
+if len(sys.argv) > 1 and sys.argv[1] == '-s':
+    send_solo_email(zois_email)
+else:
+    send_multi_email(zois_email)
 stop_time = timeit.default_timer()
 execution_time = stop_time - start_time
 # It returns time in seconds.
-print('-- mailer was Executed in ' + str('{:.4f}'.format(execution_time)) \
+print('-- mailer was Executed in ' + str('{:.4f}'.format(execution_time))
       + ' seconds --')
