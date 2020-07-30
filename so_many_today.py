@@ -7,9 +7,9 @@
 from datetime import timedelta
 from render_tools import *
 import title_tools
+from cli_tools import cli_master
 from tools import *
 import timeit
-import sys
 
 
 start_time = timeit.default_timer()
@@ -107,10 +107,7 @@ print(render_signatures())
 populate_template(tag_dictionary)
 with open('ignore/outfile.html', 'r') as html_file:
     zois_email = html_file.read()
-if len(sys.argv) > 1 and sys.argv[1] == '-s':
-    send_solo_email(zois_email)
-else:
-    send_multi_email(zois_email)
+cli_master(zois_email)
 stop_time = timeit.default_timer()
 execution_time = stop_time - start_time
 # It returns time in seconds.

@@ -123,7 +123,32 @@ def paid_days_off(now):
         off_days_paid = 2.48 + 5 + 4 + 5 + 5 + 5 + 4 + 4
     return off_days_paid
 
-def send_solo_email(zois_email):
+def send_debug_email(input_email):
+    # Create message object instance.
+    msg = MIMEMultipart('alternative')
+    # Setup the parameters of the message.
+    msg['From'] = 'zwisss@hotmail.com'
+    # Add in the message body.
+    # msg.attach(MIMEText(zois_email, 'plain'))
+    msg.attach(MIMEText(input_email, "html"))  # DELETE THIS!!!
+    server = smtplib.SMTP('smtp.live.com', 587)
+    # Hostname to send for this command defaults to the fully qualified
+    # domain name of the local host.
+    server.ehlo()
+    # Puts connection to SMTP server in TLS mode
+    server.starttls()
+    server.ehlo()
+    # Hide password typing from screen.
+    server.login('zwisss@hotmail.com', getpass.getpass('Password: '))
+    # server.login('zwisss@hotmail.com', 'replace_with_password')
+    # Set subject and send the message via the server to maself.
+    msg['Subject'] = '[DEBUG] email to maself'
+    server.sendmail(msg['From'], 'zwisss@hotmail.com',
+                    msg.as_string())
+    print('\nDEBUG e-mail to maself was successfully sent.')
+    server.quit()
+
+def send_solo_email(input_email):
     solo_email = input('Please gib e-mail: ')
     # Create message object instance.
     msg = MIMEMultipart('alternative')
@@ -131,7 +156,7 @@ def send_solo_email(zois_email):
     msg['From'] = 'zwisss@hotmail.com'
     # Add in the message body.
     # msg.attach(MIMEText(zois_email, 'plain'))
-    msg.attach(MIMEText(zois_email, "html"))  # DELETE THIS!!!
+    msg.attach(MIMEText(input_email, "html"))  # DELETE THIS!!!
     server = smtplib.SMTP('smtp.live.com', 587)
     # Hostname to send for this command defaults to the fully qualified
     # domain name of the local host.
@@ -153,14 +178,14 @@ def send_solo_email(zois_email):
     print('Solarized email was successfully sent.')
     server.quit()
 
-def send_multi_email(zois_email):
+def send_multi_email(input_email):
     # Create message object instance.
     msg = MIMEMultipart('alternative')
     # Setup the parameters of the message.
     msg['From'] = 'zwisss@hotmail.com'
     # Add in the message body.
     # msg.attach(MIMEText(zois_email, 'plain'))
-    msg.attach(MIMEText(zois_email, "html"))  # DELETE THIS!!!
+    msg.attach(MIMEText(input_email, "html"))  # DELETE THIS!!!
     server = smtplib.SMTP('smtp.live.com', 587)
     # Hostname to send for this command defaults to the fully qualified
     # domain name of the local host.
