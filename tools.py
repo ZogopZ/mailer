@@ -189,6 +189,12 @@ def send_multi_email(zois_email):
     server.sendmail(msg['From'], 'ilias.Anagnostopoulos@intrasoft-intl.com',
                     msg.as_string())
     print('Mail to Ilia, was successfully sent.')
+    # Set subject and send the message via the server to Paan.
+    msg['Subject'] = '5 EASY STEPS TO COMPLETELY ANNIHILATE your opponents ' \
+                     'on Game of Thrones Board Game Expansio.'
+    server.sendmail(msg['From'], 'gpanag123@gmail.com',
+                    msg.as_string())
+    print('Mail to Paan, was successfully sent.')
     # Set subject and send the message via the server to Kabremala.
     msg['Subject'] = 'Beekilling! The new profitable job of the future.'
     server.sendmail(msg['From'], 'tzogx@hotmail.com',
