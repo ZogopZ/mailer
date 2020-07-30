@@ -105,7 +105,7 @@ print(render_wage(monthly_wage_earned, tag_dictionary))
 print(render_total(euro_made, days_worked, tag_dictionary))
 print(render_signatures())
 populate_template(tag_dictionary)
-with open('assets/ignore/outfile.html', 'r') as html_file:
+with open('ignore/outfile.html', 'r') as html_file:
     zois_email = html_file.read()
 if len(sys.argv) > 1 and sys.argv[1] == '-s':
     send_solo_email(zois_email)

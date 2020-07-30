@@ -144,7 +144,7 @@ def render_work(time_worked_today, pay_per_microsecond_8, input_dictionary):
 
 def populate_template(input_dictionary):
     with open('assets/templates/template.html', 'r') as template_file, \
-            open('assets/ignore/outfile.html', 'w+') as output_file:
+            open('ignore/outfile.html', 'w+') as output_file:
         html_in = template_file.read()
         jinja_template = jinja2.Template(html_in)
         html_out = jinja_template.render(
