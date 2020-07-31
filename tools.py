@@ -1,6 +1,9 @@
 import datetime
+import os
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from email.mime.image import MIMEImage
+
 import smtplib
 import getpass
 
@@ -148,15 +151,22 @@ def send_debug_email(input_email):
     print('\nDEBUG e-mail to maself was successfully sent.')
     server.quit()
 
-def send_solo_email(input_email):
+def send_solo_email(hotmail_email, gmail_email):
     solo_email = input('Please gib e-mail: ')
     # Create message object instance.
-    msg = MIMEMultipart('alternative')
+    message_hotmail = MIMEMultipart('alternative')
+    message_gmail = MIMEMultipart('alternative')
     # Setup the parameters of the message.
-    msg['From'] = 'zwisss@hotmail.com'
+    message_hotmail['From'] = 'zwisss@hotmail.com'
+    message_gmail['From'] = 'zwisss@hotmail.com'
     # Add in the message body.
     # msg.attach(MIMEText(zois_email, 'plain'))
-    msg.attach(MIMEText(input_email, "html"))  # DELETE THIS!!!
+    message_hotmail.attach(MIMEText(hotmail_email, "html"))  # DELETE THIS!!!
+    message_gmail.attach(MIMEText(gmail_email, "html"))  # DELETE THIS!!!
+    image = MIMEImage(open('assets/army-insignia/stratarxis.png',
+                           'rb').read())
+    image.add_header('Content-ID', '<army-insignia>')
+    message_gmail.attach(image)
     server = smtplib.SMTP('smtp.live.com', 587)
     # Hostname to send for this command defaults to the fully qualified
     # domain name of the local host.
@@ -167,25 +177,32 @@ def send_solo_email(input_email):
     # Hide password typing from screen.
     server.login('zwisss@hotmail.com', getpass.getpass('Password: '))
     # Set subject and send the message via the server to maself.
-    msg['Subject'] = 'Very important stuff solarized + ' + solo_email
-    server.sendmail(msg['From'], 'zwisss@hotmail.com',
-                    msg.as_string())
+    message_hotmail['Subject'] = 'Very important stuff solarized + ' \
+                                 + solo_email
+    server.sendmail(message_hotmail['From'], 'zwisss@hotmail.com',
+                    message_hotmail.as_string())
     print('\nMail to maself was successfully sent.')
     # Set subject and send the message via the server to one e-mail.
-    msg['Subject'] = 'An e-mail from your φρέντ'
-    server.sendmail(msg['From'], solo_email,
-                    msg.as_string())
+    message_gmail['Subject'] = 'An e-mail from your φρέντ'
+    server.sendmail(message_gmail['From'], solo_email,
+                    message_gmail.as_string())
     print('Solarized email was successfully sent.')
     server.quit()
 
-def send_multi_email(input_email):
+def send_multi_email(hotmail_email, gmail_email, tag_dictionary):
     # Create message object instance.
-    msg = MIMEMultipart('alternative')
+    message_hotmail = MIMEMultipart('alternative')
+    message_gmail = MIMEMultipart('alternative')
     # Setup the parameters of the message.
-    msg['From'] = 'zwisss@hotmail.com'
+    message_hotmail['From'] = 'zwisss@hotmail.com'
+    message_gmail['From'] = 'zwisss@hotmail.com'
     # Add in the message body.
     # msg.attach(MIMEText(zois_email, 'plain'))
-    msg.attach(MIMEText(input_email, "html"))  # DELETE THIS!!!
+    message_hotmail.attach(MIMEText(hotmail_email, "html"))  # DELETE THIS!!!
+    message_gmail.attach(MIMEText(gmail_email, "html"))  # DELETE THIS!!!
+    image = MIMEImage(open(tag_dictionary['image_path'], 'rb').read())
+    image.add_header('Content-ID', '<army-insignia>')
+    message_gmail.attach(image)
     server = smtplib.SMTP('smtp.live.com', 587)
     # Hostname to send for this command defaults to the fully qualified
     # domain name of the local host.
@@ -196,33 +213,35 @@ def send_multi_email(input_email):
     # Hide password typing from screen.
     server.login('zwisss@hotmail.com', getpass.getpass('Password: '))
     # Set subject and send the message via the server to maself.
-    msg['Subject'] = 'Very important stuff'
-    server.sendmail(msg['From'], 'zwisss@hotmail.com',
-                    msg.as_string())
+    message_hotmail['Subject'] = 'Very important stuff'
+    server.sendmail(message_hotmail['From'], 'zwisss@hotmail.com',
+                    message_hotmail.as_string())
     print('\nMail to maself was successfully sent.')
     # Send the message via the server to theon.
-    server.sendmail(msg['From'], 'theonzwg@gmail.com',
-                    msg.as_string())
+    server.sendmail(message_hotmail['From'], 'theonzwg@gmail.com',
+                    message_hotmail.as_string())
     print('Mail to Porportheon was successfully sent.')
     # Set subject and send the message via the server to pitsimpriko.
-    msg['Subject'] = '[Zizizi] Regarding monthly salary.'
-    server.sendmail(msg['From'], 'mariannaleventi@gmail.com',
-                    msg.as_string())
+    message_gmail['Subject'] = '[Zizizi] Regarding monthly salary.'
+    server.sendmail(message_gmail['From'], 'mariannaleventi@gmail.com',
+                    message_gmail.as_string())
     print('Mail to PhD student Marianna, was successfully sent.')
     # Set subject and send the message via the server to Hlia.
-    msg['Subject'] = 'Σχετικά με τον μηνιαίο μισθό.'
-    server.sendmail(msg['From'], 'ilias.Anagnostopoulos@intrasoft-intl.com',
-                    msg.as_string())
+    message_hotmail['Subject'] = 'Σχετικά με τον μηνιαίο μισθό.'
+    server.sendmail(message_hotmail['From'], 'ilias.Anagnostopoulos@intrasoft-intl.com',
+                    message_hotmail.as_string())
     print('Mail to Ilia, was successfully sent.')
     # Set subject and send the message via the server to Paan.
-    msg['Subject'] = '5 EASY STEPS TO COMPLETELY ANNIHILATE your opponents ' \
-                     'on Game of Thrones Board Game Expansio.'
-    server.sendmail(msg['From'], 'gpanag123@gmail.com',
-                    msg.as_string())
+    message_gmail['Subject'] = '5 EASY STEPS TO COMPLETELY ANNIHILATE your ' \
+                               'opponents on Game of Thrones Board Game ' \
+                               'Expansio.'
+    server.sendmail(message_gmail['From'], 'gpanag123@gmail.com',
+                    message_gmail.as_string())
     print('Mail to Paan, was successfully sent.')
     # Set subject and send the message via the server to Kabremala.
-    msg['Subject'] = 'Beekilling! The new profitable job of the future.'
-    server.sendmail(msg['From'], 'tzogx@hotmail.com',
-                    msg.as_string())
+    message_hotmail['Subject'] = 'Beekilling! The new profitable job of' \
+                                 'the future.'
+    server.sendmail(message_hotmail['From'], 'tzogx@hotmail.com',
+                    message_hotmail.as_string())
     print('Mail to Taso, was successfully sent.')
     server.quit()

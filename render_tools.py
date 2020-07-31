@@ -143,8 +143,8 @@ def render_work(time_worked_today, pay_per_microsecond_8, input_dictionary):
     return work_string
 
 def populate_template(input_dictionary):
-    with open('assets/templates/template.html', 'r') as template_file, \
-            open('ignore/outfile.html', 'w+') as output_file:
+    with open('assets/templates/template_hotmail.html', 'r') as template_file, \
+            open('ignore/hotmail.html', 'w+') as output_file:
         html_in = template_file.read()
         jinja_template = jinja2.Template(html_in)
         html_out = jinja_template.render(
@@ -164,4 +164,25 @@ def populate_template(input_dictionary):
             wage=input_dictionary['wage'],
             total=input_dictionary['total'])
         output_file.write(html_out)
-        return
+    with open('assets/templates/template_gmail.html', 'r') as template_file,\
+            open('ignore/gmail.html', 'w+') as output_file:
+        html_in = template_file.read()
+        jinja_template = jinja2.Template(html_in)
+        html_out = jinja_template.render(
+            date=input_dictionary['date'],
+            time=input_dictionary['time'],
+            title=input_dictionary['title'],
+            base64_content=input_dictionary['encoded_image'],
+            years=input_dictionary['years'],
+            months=input_dictionary['months'],
+            weeks=input_dictionary['weeks'],
+            days=input_dictionary['days'],
+            hours=input_dictionary['hours'],
+            minutes=input_dictionary['minutes'],
+            milliseconds=input_dictionary['milliseconds'],
+            microseconds=input_dictionary['microseconds'],
+            work=input_dictionary['work'],
+            wage=input_dictionary['wage'],
+            total=input_dictionary['total'])
+        output_file.write(html_out)
+    return

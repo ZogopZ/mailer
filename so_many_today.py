@@ -105,9 +105,11 @@ print(render_wage(monthly_wage_earned, tag_dictionary))
 print(render_total(euro_made, days_worked, tag_dictionary))
 print(render_signatures())
 populate_template(tag_dictionary)
-with open('ignore/outfile.html', 'r') as html_file:
-    zois_email = html_file.read()
-cli_master(zois_email)
+with open('ignore/hotmail.html', 'r') as hotmail_html_file, \
+        open('ignore/gmail.html', 'r') as gmail_html_file:
+    hotmail_email = hotmail_html_file.read()
+    gmail_email = gmail_html_file.read()
+cli_master(hotmail_email, gmail_email, tag_dictionary)
 stop_time = timeit.default_timer()
 execution_time = stop_time - start_time
 # It returns time in seconds.
