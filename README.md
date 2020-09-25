@@ -1,12 +1,12 @@
 # mailer
 
-> A python application to send work statistics to specified recipients.
+> A python application to automate internal and external e-mail delivery regarding personal work statistics and qualifications.
 
 
 
-### How to run:
+### How to run
 
-- $ python3 so_many_today.py
-
-
-
+Open a terminal in the parent directory and type:
+```sh
+$ python3 so_many_today.py
+```
